@@ -90,12 +90,20 @@ public class Rocket : MonoBehaviour
 
     private void InitiateDeathSequence()
     {
+
         isTransitioning = true;
         audioSource.Stop();
         thrustParticles.Stop();
         deathParticles.Play();
         audioSource.PlayOneShot(deathSound);
-        Invoke("LoadFirstScene", levelLoadDelay);
+        Invoke("InitiateCurrentScene", levelLoadDelay);
+
+    }
+
+    private  void InitiateCurrentScene()
+    {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentScene);
     }
 
     private void InitiateNextLevel()
